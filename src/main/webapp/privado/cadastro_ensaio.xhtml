@@ -1,0 +1,53 @@
+   <ui:composition template="/WEB-INF/templates/layoutLobby.xhtml" 
+   xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:h="http://xmlns.jcp.org/jsf/html"
+   xmlns:f="http://xmlns.jcp.org/jsf/core"
+   xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+   xmlns:p="http://primefaces.org/ui">
+ 
+    <ui:define name="conteudo">
+    
+    <h1 class="if-page-title">Cadastro de Ensaio</h1>
+		<h:form  id="frm">
+		
+		<!-- Atualizar bean -->
+		<f:metadata>
+			<f:viewParam name="dummy" />
+			<f:event listener="#{ensaio.preRender}" type="preRenderView" />
+		</f:metadata>
+        
+        <!-- MENU -->
+        <p:toolbar>
+             <p:toolbarGroup  align="left">
+               <p:commandButton value="Salvar"
+                                icon="ui-icon-check"
+                                action="#{ensaio.salvar}"
+                                update="frm"/>
+             </p:toolbarGroup>             
+          
+             <p:toolbarGroup  align="right">
+               <p:commandButton value="Novo"
+                                icon="ui-icon-plus"
+                                action="#{ensaio.novo}"/>
+               <p:button value="Pesquisar" outcome="ensaio"/>                 
+             </p:toolbarGroup>             
+          </p:toolbar> 
+        
+        <!-- FORMULARIO -->
+        <p:messages/>
+        <div class="ui-fluid">
+	        <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-10">
+		        
+		         <p:outputLabel value="Data" for="data" />
+		         <p:calendar id="data" required="true"
+                      value="#{ensaio.obj.data}" 
+                      pattern="dd/MM/yyyy HH:mm"
+				      locale="pt" />
+		        		       
+			</p:panelGrid>
+		</div>
+		
+
+		</h:form>
+    </ui:define>
+</ui:composition>

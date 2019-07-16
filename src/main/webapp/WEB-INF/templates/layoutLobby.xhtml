@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>Orquestra do Centro-Oeste Mineiro</title>
+
+	<h:outputStylesheet library="css" name="layout.css" />
+	<h:outputScript target="body" library="primefaces"
+		name="jquery/jquery.js" />
+	<h:outputScript target="body" library="js" name="app.js" />
+
+	<script type="text/javascript">
+		//<![CDATA[
+		function start() {
+			PF('statusDialog').show();
+		}
+
+		function stop() {
+			PF('statusDialog').hide();
+		}
+		//]]>
+	</script>
+</h:head>
+
+<h:body style="background-color: #D8D8D8;">
+
+	<nav class="cabecalho navbar-expand-lg">
+		<i class="navbar-brand">OCOM</i>
+		<ul class="navbar-nav">
+			<li><h:outputLink value="/ocom/j_spring_security_logout">
+					<i class="fa fa-fw fa-power-off cabecalho-link"
+						style="margin-right: 50px; margin-top: -15px;">#{seguranca.loginUsuario}</i>
+				</h:outputLink></li>
+			<li><h:link outcome="/privado/integrante.xhtml" rendered="#{(seguranca.permAdmin)}">
+					<i class="cabecalho-link">Integrantes</i>
+				</h:link></li>
+			<li><h:link outcome="/privado/partitura.xhtml" rendered="#{(seguranca.permMaestro or seguranca.permMusico)}">
+					<i class="cabecalho-link">Partituras</i>
+				</h:link></li>
+			<li><h:link outcome="/privado/apresentacao.xhtml" rendered="#{(seguranca.permMaestro or seguranca.permMusico)}">
+					<i class="cabecalho-link">Apresentações</i>
+				</h:link></li>
+			<li><h:link outcome="/privado/ensaio.xhtml" rendered="#{(seguranca.permMaestro or seguranca.permMusico)}">
+					<i class="cabecalho-link">Ensaios</i>
+				</h:link></li>
+		</ul>
+	</nav>
+
+	<section class="if-content  js-content">
+		<ui:insert name="conteudo" />
+	</section>
+
+
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright - Orquestra do
+				Centro-Oeste Mineiro 2018</p>
+		</div>
+	</footer>
+
+</h:body>
+
+</html>

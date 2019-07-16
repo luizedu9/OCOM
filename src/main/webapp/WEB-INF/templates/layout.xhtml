@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>Orquestra do Centro-Oeste Mineiro</title>
+
+	<h:outputStylesheet library="css" name="layout.css" />
+	<h:outputScript target="body" library="primefaces"
+		name="jquery/jquery.js" />
+	<h:outputScript target="body" library="js" name="app.js" />
+
+	<script>
+		PrimeFaces.locales['pt'] = {			closeText : 'Fechar',
+			prevText : 'Anterior',
+			nextText : 'Próximo',
+			currentText : 'Começo',
+			monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio',
+					'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro',
+					'Novembro', 'Dezembro' ],
+			monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+					'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+			dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta',
+					'Sexta', 'Sábado' ],
+			dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb' ],
+			dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+			weekHeader : 'Semana',
+			firstDay : 0,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Só Horas',
+			timeText : 'Tempo',
+			hourText : 'Hora',
+			minuteText : 'Minuto',
+			secondText : 'Segundo',
+			ampm : false,
+			month : 'Mês',
+			week : 'Semana',
+			day : 'Dia',
+			allDayText : 'Todo o Dia'
+		};
+	</script>
+
+</h:head>
+
+<h:body style="background-color: #D8D8D8;">
+
+	<nav class="cabecalho navbar-expand-lg">
+		<i class="navbar-brand">OCOM</i>
+		<ul class="navbar-nav">
+			<li><h:link outcome="/index">
+					<i class="cabecalho-link">Início</i>
+				</h:link></li>
+			<li><h:link outcome="/agenda">
+					<i class="cabecalho-link">Agenda</i>
+				</h:link></li>
+			<li><h:link outcome="/sobre">
+					<i class="cabecalho-link">Sobre</i>
+				</h:link></li>
+			<li><h:link outcome="/privado/lobby.xhtml">
+					<i class="cabecalho-link">Área do Músico</i>
+				</h:link></li>
+		</ul>
+	</nav>
+
+	<section class="if-content  js-content">
+		<ui:insert name="conteudo" />
+	</section>
+
+
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright - Orquestra do
+				Centro-Oeste Mineiro 2018</p>
+		</div>
+	</footer>
+
+</h:body>
+
+</html>

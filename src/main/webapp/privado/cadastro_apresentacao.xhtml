@@ -1,0 +1,63 @@
+
+<ui:composition template="/WEB-INF/templates/layoutLobby.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h1 class="if-page-title">Cadastro de Apresentação</h1>
+		<h:form id="frm">
+
+			<!-- Atualizar bean -->
+			<f:metadata>
+				<f:viewParam name="dummy" />
+				<f:event listener="#{apresentacao.preRender}" type="preRenderView" />
+			</f:metadata>
+
+			<!-- MENU -->
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Salvar" icon="ui-icon-check"
+						action="#{apresentacao.salvar}" update="frm" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{apresentacao.novo}" />
+					<p:button value="Pesquisar" outcome="apresentacao" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<!-- FORMULARIO -->
+			<p:messages />
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" layout="grid"
+					columnClasses="ui-grid-col-2, ui-grid-col-10">
+
+					<p:outputLabel value="Data" for="data" />
+					<p:calendar id="data" required="true"
+						value="#{apresentacao.obj.data}" pattern="dd/MM/yyyy HH:mm"
+						locale="pt" />
+
+					<p:outputLabel value="Local:" for="txtLocal" />
+					<p:inputText value="#{apresentacao.obj.local}" id="txtLocal"
+						required="true">
+						<f:validateLength minimum="3" maximum="50" />
+					</p:inputText>
+					
+					<p:outputLabel value="Informações:" for="txtInformacao" />
+					<p:inputText value="#{apresentacao.obj.informacao}" id="txtInformacao">
+						<f:validateLength minimum="3" maximum="50" />
+					</p:inputText>
+
+
+				</p:panelGrid>
+			</div>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

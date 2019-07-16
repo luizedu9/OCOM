@@ -1,0 +1,116 @@
+
+<ui:composition template="/WEB-INF/templates/layoutLobby.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+
+		<h1 class="if-page-title">Cadastro de Usuário</h1>
+		<h:form id="frm">
+
+			<!-- Atualizar bean -->
+			<f:metadata>
+				<f:viewParam name="dummy" />
+				<f:event listener="#{integrante.preRender}" type="preRenderView" />
+			</f:metadata>
+
+			<!-- MENU -->
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="Salvar" icon="ui-icon-check"
+						action="#{integrante.salvar}" update="frm" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Novo" icon="ui-icon-plus"
+						action="#{integrante.novo}" />
+					<p:button value="Pesquisar" outcome="integrante" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<!-- FORMULARIO -->
+			<p:messages />
+			<div class="ui-fluid">
+				<p:panelGrid columns="2" layout="grid"
+					columnClasses="ui-grid-col-2, ui-grid-col-10">
+
+					<p:outputLabel value="Nome:" for="txtNome" />
+					<p:inputText value="#{integrante.obj.nome}" id="txtNome"
+						required="true">
+						<f:validateLength minimum="3" maximum="50" />
+					</p:inputText>
+
+					<p:outputLabel value="Data de nascimento" for="dtNascimento" />
+					<p:calendar id="dtNascimento" required="true"
+						value="#{integrante.obj.dtNascimento}" pattern="dd/MM/yyyy"
+						locale="pt" />
+
+					<p:outputLabel value="CPF:" for="txtCPF" />
+					<p:inputMask value="#{integrante.obj.cpf}" id="txtCPF"
+						required="true" mask="999.999.999-99">
+						<f:validateLength minimum="3" maximum="50" />
+					</p:inputMask>
+
+					<p:outputLabel value="Endereço:" for="txtEndereco" />
+					<p:inputText value="#{integrante.obj.endereco}" id="txtEndereco"
+						required="true">
+						<f:validateLength minimum="3" maximum="50" />
+					</p:inputText>
+
+					<p:outputLabel for="txtEmail" value="Email" />
+					<p:inputText id="txtEmail" value="#{integrante.obj.email}"
+						required="true" requiredMessage="Informe o email do integrante."
+						validatorMessage="E-mail inválido">
+						<f:validateRegex pattern="[a-zA-Z0-9\-\_\.]+@[a-zA-Z0-9\-\_\.]+" />
+					</p:inputText>
+
+					<p:outputLabel for="rdbSexo" value="Sexo:" />
+					<p:selectOneRadio id="rdbSexo" value="#{integrante.obj.sexo}">
+						<f:selectItems value="#{integrante.sexos}" var="sexo"
+							itemValue="#{sexo}" itemLabel="#{sexo.descricao}" />
+					</p:selectOneRadio>
+
+					<p:outputLabel for="rdbPermissao" value="Tipo de Usuário:" />
+					<p:selectManyCheckbox id="rdbPermissao"
+						value="#{integrante.permissoes}" required="true">
+						<f:selectItem itemLabel="Administrador" itemValue="ADMIN" />
+						<f:selectItem itemLabel="Maestro" itemValue="MAESTRO" />
+						<f:selectItem itemLabel="Musico" itemValue="MUSICO" />
+					</p:selectManyCheckbox>
+
+
+					<p:outputLabel value="Instrumento:" for="cbInstrumento" />
+					<p:selectOneMenu id="cbInstrumento"
+						value="#{integrante.obj.instrumento}">
+						<f:selectItem itemLabel="Selecione um instrumento" />
+						<f:selectItems value="#{integrante.instrumentos}"
+							var="instrumento" itemLabel="#{instrumento.nome}"
+							itemValue="#{instrumento}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Login:" for="txtLogin" />
+					<p:inputText value="#{integrante.obj.login}" id="txtLogin"
+						required="true">
+						<f:validateLength minimum="3" maximum="50" />
+					</p:inputText>
+
+					<p:outputLabel value="Senha" for="inpSenha" />
+					<p:password id="inpSenha" required="true"
+						value="#{integrante.obj.senha}" feedback="true" weakLabel="Fraca"
+						goodLabel="Boa" strongLabel="Forte"
+						promptLabel=" Informe uma senha" inline="true"
+						match="confirmacaoSenha" />
+
+					<p:outputLabel value="Confirme a senha" for="confirmacaoSenha" />
+					<p:password id="confirmacaoSenha" required="true" />
+
+				</p:panelGrid>
+			</div>
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>
